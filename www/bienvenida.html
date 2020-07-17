@@ -1,0 +1,90 @@
+<html>
+<head>
+	<link rel="stylesheet" type="text/css" href="css/index.css" href="bootstrap-4.3.1-dist/css/bootstrap.min.css" />         
+	<script src="js/jquery-3.3.1.min.js"> </script>
+	<title>Banco UCEL</title>
+	
+	<script>
+		
+	function onMapSuccess(obj){
+			obj.Latitude;
+			alert('Latitude: '          + obj.coords.latitude          + '\n' +
+				  'Longitude: '         + obj.coords.longitude         + '\n' +
+				  'Altitude: '          + obj.coords.altitude          + '\n' +
+				  'Accuracy: '          + obj.coords.accuracy          + '\n' +
+				  'Altitude Accuracy: ' + obj.coords.altitudeAccuracy  + '\n' +
+				  'Heading: '           + obj.coords.heading           + '\n' +
+				  'Speed: '             + obj.coords.speed             + '\n' +
+				  'Timestamp: '         + obj.timestamp                + '\n');
+		}
+		
+		function onMapError(error){
+			alert('code: '    + error.code    + '\n' +
+              'message: ' + error.message + '\n');
+		}
+		
+		function obtenerPosicion(){
+			navigator.geolocation.getCurrentPosition(onMapSuccess,onMapError);
+		}
+		
+	const name = sessionStorage.name;
+	const surname = sessionStorage.surname;
+	const dni = sessionStorage.dni;
+	var caja = sessionStorage.caja;
+	var mov = sessionStorage.mov;
+	
+	function takePicture(){
+		navigator.camera.getPicture(onSuccess,onError,{ quality: 25,
+		destinationType: Camera.DestinationType.DATA_URL,
+		correctOrientation: true
+		});			
+	}
+	
+	function onSuccess(data){
+		$("#foto").attr("src","data:image/jpeg;base64,"+data)
+	}
+	
+	function onError(){
+		alert("Error");
+	}
+	
+	$(document).ready(function (){
+		console.log(navigator.camera);
+	});
+		
+		
+		
+		
+	</script>
+	
+</head>
+<body > 
+
+		<div class="container centrar">
+			<div class="derecha">
+				<p id="name" style="margin:10px"></p>
+				<h>|</h>
+				<a href="index.html" id="out" >Salir</a>
+			</div>
+			<a href="bienvenida.html"><img id="logoUcel" src="img/logoUcel1.png"/></a>
+			
+			<h1>Banco UCEL</h1>		
+		</div>
+		<div class="derecha">
+			<img id="foto" />
+			<a href="#" id="iconos"><img src="img/camara.png" onclick="javascripts:takePicture()" width="10%" /></a>
+			<a href="#" id="iconos"><img src="img/location.png" onclick="javascripts:obtenerPosicion()" width="10%" /></a>
+		</div>
+		<div class="container centrar">
+			<p><button id="menu" onclick="window.location='depositos.html'" class="">Depositos</button></p>
+			<p><button id="menu" onclick="window.location='ultimosmov.html'"  class="">Ultimos Movimientos</button></p>	
+			<p><button id="menu" onclick="window.location='transferencias.html'" class="">Transferencias</button></p>	
+			<p><button id="menu" onclick="window.location='pagos.html'" class="">Pagos de Servicios</button></p>
+		</div>
+		
+		<script>document.getElementById("name").innerHTML = "Bienvenido/a "+name;</script>
+		<script type="text/javascript" src="cordova.js"></script>
+		<script type="text/javascript" src="js/index.js"></script>
+		<script type="text/javascript">app.initialize();</script>
+</body>
+</html>

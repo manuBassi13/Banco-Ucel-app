@@ -1,0 +1,73 @@
+<html>
+<head>
+	<link rel="stylesheet" type="text/css" href="css/index.css" href="bootstrap-4.3.1-dist/css/bootstrap.min.css" />         
+	<script src="js/jquery-3.3.1.min.js"> </script>
+	<title>Transferencias | Banco UCEL</title>
+	
+	<script>
+		var caja = sessionStorage.caja;
+		
+		function Transferir(){
+			var monto = $('#monto').val();
+			var dni = $('#DNI').val();
+			
+			if ((dni.length < 7)||(dni.length > 9)){
+				alert("Ingrese un DNI válido\nEntre 7 y 9 caracteres");
+				document.getElementById("monto").style.removeProperty('border');
+				document.getElementById("DNI").focus();				
+				document.getElementById("DNI").style.border = "3px solid #a00";		
+			}else if (monto>0){
+				if (Number(monto) > Number(caja)){
+					alert("Saldo insuficiente.");
+					window.location="bienvenida.html";
+				}else if (confirm("Va a transferir $"+monto+'\nConfirma la operación?')){
+						caja = (Number(caja) - Number(monto));
+						sessionStorage.caja = caja;
+						monto = (monto*-1)
+						var tipoMov='Transferencia';
+						guardarMov(tipoMov,monto);
+						alert('Transferencia realizada con éxito\nSaldo actualizado: $'+caja);
+						document.getElementById("formulario").reset();
+				}else{
+					alert("No se realizó la transferencia");
+					document.getElementById("formulario").reset();
+				}
+			}else{
+				alert("Ingrese un monto válido");
+				document.getElementById("DNI").style.removeProperty('border');
+				document.getElementById("monto").focus();
+				document.getElementById("monto").style.border = "4px solid #a00";
+			}
+			
+		}
+		
+	</script>
+</head>
+<body > 
+	<div class="container centrar">
+		<div class="derecha">
+			<a href="bienvenida.html" id="out">Volver</a>
+			<h>|</h>
+			<a href="index.html" id="out">Salir</a>
+		</div>
+		<a href="bienvenida.html"><img id="logoUcel" src="img/logoUcel1.png"/></a>
+		<h1>Banco UCEL</h1>
+	</div>
+
+	<div  class="formulario">
+		<form  id="formulario" >
+			<br>
+			<p id="cabeceraForm">Transferencias</p>
+			<br>
+			<p><input type="number" name="DNI" placeholder="DNI persona a transferir" id="DNI" /></p>
+			<p><input type="number" name="monto" placeholder="Monto a transferir" id="monto" /></p>
+			<br>
+			<p><button type="button"  onclick="javascript:Transferir()">Transferir</button></p>
+				
+		</form>	
+	</div>
+		
+	<script src="js/fecha.js"> </script>
+	<script src="js/guardarMov.js"></script>
+</body>
+</html>

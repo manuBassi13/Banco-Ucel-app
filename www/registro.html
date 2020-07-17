@@ -1,0 +1,65 @@
+<html>
+
+<head>
+    <link rel="stylesheet" type="text/css" href="css/index.css" href="bootstrap-4.3.1-dist/css/bootstrap.min.css" />
+    <title>Registro | Banco UCEL</title>       
+	<script src="js/jquery-3.3.1.min.js"> </script>
+
+	<script>
+	   	
+		function registro(){
+			
+			if (validaReg()){
+				var name = $('#name').val();
+				localStorage.name = name;
+				var surname = $('#surname').val();
+				localStorage.surname = surname;
+				var dni = $('#dni').val();
+				localStorage.dni = dni;
+				var user = $('#user').val();
+				localStorage.user = user;
+				var pass = $('#pass').val();
+				localStorage.pass = pass;
+				localStorage.caja=0;
+				localStorage.mov=[''];
+				alert("Usuario registrado")
+				window.location = "index.html"
+			}
+		}	
+			
+	</script>
+</head>
+
+<body >
+    
+	<div class="container centrar">
+	<div class="derecha">
+		<a href="index.html" id="out">Volver</a>
+	</div>
+		<a href="index.html"><img id="logoUcel" src="img/logoUcel1.png"/></a>
+		<h1>Banco UCEL</h1>
+	</div>
+	
+    <div class="formulario">
+		<form name="formReg" >
+			<p id="cabeceraForm">Registro</p>
+			<p><input type="text" name="name"   placeholder="Nombre" id="name" /></p>
+			<p><input type="text" name="surname"  placeholder="Apellido" id="surname"/></p>
+			<p><input type="number"  name="dni"   placeholder="DNI" id="dni"/></p>
+			<p><input type="text" name="user"  placeholder="Usuario nuevo" id="user"/></p>
+			<p><input type="password" name="pass"  placeholder="Clave nueva" id="pass"/></p>
+			<p><button type="button" onclick="javascript:registro()">Registrarte</button></p>
+		</form>				
+    </div>
+	
+	
+	<div>
+		<img id="foto" style="width:25%;"/>
+	</div>
+   
+    <script src="js/valida.js"></script>
+    <script type="text/javascript" src="cordova.js"></script>
+    <script type="text/javascript" src="js/index.js"></script>
+    <script type="text/javascript">app.initialize();</script>
+</body>
+</html>

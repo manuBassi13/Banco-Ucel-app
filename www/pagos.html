@@ -1,0 +1,101 @@
+<html>
+<head>
+	<link rel="stylesheet" type="text/css" href="css/index.css" href="bootstrap-4.3.1-dist/css/bootstrap.min.css" />         
+	<script src="js/jquery-3.3.1.min.js"> </script>
+	<title>Pagos | Banco UCEL</title>
+	
+	<script>
+		var caja = sessionStorage.caja;
+		var monto, servicio;
+		
+		function removeSpan(){
+			switch (servicio){
+				case "Aguas Santafesinas": $("#0").remove();
+					break;
+				case "Litoral Gas": $("#1").remove();
+					break;
+				case "EPE": $("#2").remove();
+					break;
+				case "Internet": $("#3").remove();
+					break;
+				case "TV":$("#4").remove();
+					break;
+				case "Expensas":$("#5").remove();
+					break;
+				default: break;
+			}
+		}
+		
+		function valoresRbu(){
+			var rbu = document.getElementsByName('rbuServicio');	
+			for(i = 0; i < rbu.length; i++){
+				if (rbu[i].checked){
+					monto = rbu[i].value;
+					servicio = rbu[i].id;
+				}
+			}	
+		}
+		
+		function Pago(){
+			monto = 0;
+			valoresRbu();
+			
+			if (monto === 0){
+				alert("Debe seleccionar un servicio")
+			}
+			else if (Number(monto) > Number(caja)){
+				alert("Saldo insuficiente.");
+				window.location="bienvenida.html";
+			}else if (confirm("Servicio a pagar: "+servicio+"\nMonto: $"+monto+"\nConfirma la operación?")){
+					caja = (Number(caja) - Number(monto));
+					sessionStorage.caja = caja;
+					monto = (monto*-1)
+					var tipoMov='Pago';
+					guardarMov(tipoMov,monto);
+					alert('Pago realizado con éxito\nSaldo actualizado: $'+caja);
+					removeSpan();
+			}else{
+				alert("No se realizó el pago");
+			}
+			
+		}
+		
+	</script>
+</head>
+<body > 
+	<div class="container centrar">
+		<div class="derecha">
+			<a href="bienvenida.html" id="out">Volver</a>
+			<h>|</h>
+			<a href="index.html" id="out">Salir</a>
+		</div>
+		<a href="bienvenida.html"><img id="logoUcel" src="img/logoUcel1.png"/></a>
+		<h1>Banco UCEL</h1>
+	</div>
+	
+	<div id="deviceready" class="formulario">
+		<form  method="post">
+			<p id="cabeceraForm">Pago de servicios</p>		
+			<p>
+				<span id="0"><input type="radio" name="rbuServicio" id="Aguas Santafesinas" value="420" required><label id="pago"> Aguas Santafesinas ($420)</label></span>
+				
+				<span id="1"><input type="radio" name="rbuServicio" id="Litoral Gas" value="360"><label id="pago"> Litoral Gas ($360)</label></span>
+				
+				<span id="2"><input type="radio" name="rbuServicio" id="EPE" value="300"><label id="pago"> EPE ($300)</label></span>
+				
+				<span id="3"><input type="radio" name="rbuServicio" id="Internet" value="1500"><label id="pago"> Internet ($1500)</label></span>
+				
+				<span id="4"><input type="radio" name="rbuServicio" id="TV" value="800"><label id="pago"> TV ($800)</label></span>
+				
+				<span id="5"><input type="radio" name="rbuServicio" id="Expensas" value="2300"><label id="pago"> Expensas ($2300)</label></span>
+			</p>
+			<br>
+			<p><button type="button" id="pago" onclick="javascript:Pago()">Pagar servicio</button></p>
+				
+		</form>	
+	</div>
+
+	<script src="js/fecha.js"> </script>
+	<script src="js/guardarMov.js"></script>	
+</body>
+</html>

@@ -1,0 +1,68 @@
+<html>
+<head>
+	<link rel="stylesheet" type="text/css" href="bootstrap-4.3.1-dist/css/bootstrap.min.css" />         
+	<script src="js/jquery-3.3.1.min.js"> </script>
+	<title>Banco UCEL</title>
+	<style>
+		body{
+			background-color:#0D4170;
+		}
+		h1{
+			color:white;
+		}
+		.centrar{
+			text-align: center;  <!-- centra las cosas (despues hay que llamarla en el programa principal) -->
+		}
+		.botonancho{
+			width: 70%;     <!-- nivela el color de la misma longitud del fondo de todos los botones -->
+			height: 100px;
+			background-color:#102C4A;
+			font-size:20px;
+			
+		}
+		.container{
+			padding: 5px;    <!-- separa los botones -->
+		}
+	</style>
+	
+	<script>
+		
+	function abrirCamara(){
+			navigator.camera.getPicture(onSuccess,onError,{ quality: 25,
+			destinationType: Camera.DestinationType.DATA_URL,
+			correctOrientation: true
+			});			
+		}
+		
+		function onSuccess(data){
+			$("#foto").attr("src","data:image/jpeg;base64,"+data)
+			alert();
+		}
+		
+		function onError(){
+			alert("Error");
+		}
+		
+		$(document).ready(function (){
+			console.log(navigator.camera);
+			alert(navigator.camera);
+		});
+	</script>
+	
+</head>
+<body > 
+
+		<div class="container centrar">
+			<div class="text-right">
+				<a href="index.html" style="color:#C51411; font-size:16px;">Salir</a>
+			</div>
+			<a href="bienvenida.html"><img src="img/ucel.png" width="175" height="130"/></a>
+			<h1>Banco UCEL</h1>		
+		</div>
+		
+		<div class="container centrar">
+			<img id="foto" style="width:300px; height:300px"/>
+		</div>
+		
+</body>
+</html>

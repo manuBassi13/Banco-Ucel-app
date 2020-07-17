@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <link rel="stylesheet" type="text/css" href="css/index.css"  />
+    <title>Login | Banco UCEL</title>       
+	<script src="js/jquery-3.3.1.min.js"> </script>
+	<script src="phonegap.js"> </script>
+
+<script>
+   var us = (localStorage.getItem('user'));
+   
+   function validar1(){
+		if (validaLogin()){
+			user=$("#usuario").val();
+			pass=$("#clave").val();
+		
+			sessionStorage.setItem('name',localStorage.name);
+			sessionStorage.setItem('surname',localStorage.surname);
+			sessionStorage.setItem('dni',localStorage.dni);
+			sessionStorage.setItem('user',localStorage.user);
+			sessionStorage.setItem('pass',localStorage.pass);
+			sessionStorage.setItem('caja',localStorage.caja);	
+			sessionStorage.setItem('mov',localStorage.mov);
+			localStorage.clear();
+			alert("Bienvenido/a: " + sessionStorage.name);
+						
+			window.location="bienvenida.html";
+		}
+   }
+   
+   
+	/*function validar(){
+		obj.user=$("#usuario").val();
+		obj.pass=$("#clave").val();
+		$.ajax("http://ng000691.ferozo.com/ucel/tm/login2.php",{
+			type:"post",
+			data:{"usuario":user,"clave":pass},
+			success:funcion1
+		});
+	}*/
+	//document.addEventListener("deviceready", onDeviceReady, false);
+
+	
+	/*function onDeviceReady(){
+		var dataBase = window.openDatabase("127.0.0.1:3306","","ProyectoLibro",200000);
+	}*/
+		 
+		 
+/*	function funcion1(respuesta){
+		alert(respuesta);
+		obj=JSON.parse(respuesta);
+		if(obj.status=="OK"){
+			ss=window.sessionStorage;
+			ss.setItem('user',obj.user);
+			window.location="bienvenida.html"    //se redirecciona a la pagina bienvenida.html (hay que definirla dentro de la misma carpeta de index) 
+		}
+	}*/
+
+</script>
+</head>
+
+<body>
+    
+	<div class="container">
+		<img id="logoUcel" src="img/logoUcel1.png" />
+		<h1>Banco UCEL</h1>
+	</div>
+	
+	<form class="formulario">
+		<p id="cabeceraForm">Iniciar sesión</p>
+		<p><label><input type="text" name="usuario" id="usuario" value="" placeholder="Ingrese su usuario"/></label></p>
+		<p><label><input type="password" name="clave" id="clave" value="" placeholder="Ingrese su clave"/></label></p>
+		<p><button  type="button"  onclick="javascript:validar1()">Ingresar</button></p>
+		
+		<hr>
+		<p>¿No tenés cuenta?</p>
+		<p><button type="button" id="registro" onclick="window.location='registro.html';">Registrarte</button></p>	
+	</form>				
+	
+    <script src="js/valida.js"></script>
+    <script type="text/javascript" src="cordova.js"></script>
+    <script type="text/javascript" src="js/index.js"></script>
+    <script type="text/javascript">app.initialize();</script>
+
+</body>
+</html>

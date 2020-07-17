@@ -1,0 +1,62 @@
+<html>
+<head>
+	<link rel="stylesheet" type="text/css" href="css/index.css" href="bootstrap-4.3.1-dist/css/bootstrap.min.css" />         
+	<script src="js/jquery-3.3.1.min.js"> </script>
+	<title>Movimientos | Banco UCEL</title>
+	
+	<script>
+		$(document).ready(buscarMov);		
+		
+		function buscarMov(){
+		var mov = sessionStorage.getItem('mov') || "[]";
+			if (mov === "[]"){
+				alert("No existen movimientos");
+				window.location='bienvenida.html';
+			}else{
+				procesar(mov);
+			}
+		}
+		
+		function procesar(mov){
+			mov = JSON.parse(mov);
+			for(i=0; i<mov.length; i++) crearFila(mov[i]);
+		}
+		
+		function crearFila(mov){
+			tag='<tr><td scope="row">'+(i+1)+'</td><td>'+mov[0]+'</td><td>'+mov[1]+'</td><td>$'+mov[2]+'</td><td>$'+mov[3]+'</td></tr>';
+			$("tbody").append(tag);
+		}
+	</script>
+</head>
+<body > 
+	<div class="container centrar">
+		<div class="derecha">
+			<a href="bienvenida.html" id="out">Volver</a>
+			<h>|</h>
+			<a href="index.html" id="out">Salir</a>
+		</div>
+		<a href="bienvenida.html"><img id="logoUcel" src="img/logoUcel1.png"/></a>
+		<h1>Banco UCEL</h1>
+		<h1>Movimientos</h1>
+	</div>
+
+	<div class="centrar">
+		<table>
+			<thead>
+				<tr>
+					<th scope="col">#</th>
+					<th scope="col">Fecha</th>
+					<th scope="col">Tipo</th>
+					<th scope="col">Importe</th>
+					<th scope="col">Saldo</th>
+				</tr>
+			</thead>
+			
+			<tbody>
+			</tbody>
+		</table>
+	
+	</div>
+		
+</body>
+</html>
